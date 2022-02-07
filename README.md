@@ -1,6 +1,12 @@
-# SAFE Template
+# Fable issues with Aether optics library
 
-This template can be used to generate a full-stack web application using the [SAFE Stack](https://safe-stack.github.io/). It was created using the dotnet [SAFE Template](https://safe-stack.github.io/docs/template-overview/). If you want to learn more about the template why not start with the [quick start](https://safe-stack.github.io/docs/quickstart/) guide?
+### Cannot resolve trait call op_HatDot
+- In certain situations, using the infix operators for the Aether optics libary (e.g. (^.)) is generating "Cannot resolve trait call op_HatDot" errors.
+- When this happens, different code that previsouly compiled no longer does.
+- See comments line 50 of AttemptRepro.fs.
+
+### Wrong overload selected
+- Work in progress to isolate an error we've encountered after upgrading from Fable 3.2.1 to 3.6.3 where it appears the Lens overload is being selected rather than the Prism one.
 
 ## Install pre-requisites
 
