@@ -50,8 +50,8 @@ let AttemptRepro (currentValue : AccountDto option)=
     // This compiles OK. But comment the above two lines out, and uncomment the ones below and you'll get the
     // "Cannot resolve trait call op_HatDot - Inline call from " errors, but it *also* causes new compile time errors on
     // AttemptRepro.fs lines 38, 43 and 48.
-    //    let inline getL (optic : Lens<InsurancePolicyDetailsDto,'a>) = currentValue^.(details_ >?> optic)
-    //    let inline getP (optic : Prism<InsurancePolicyDetailsDto,'a>) = currentValue^.(details_ >?> optic)
+    //let inline getL (optic : Lens<InsurancePolicyDetailsDto,'a>) = currentValue^.(details_ >?> optic)
+    //let inline getP (optic : Prism<InsurancePolicyDetailsDto,'a>) = currentValue^.(details_ >?> optic)
 
     let lensFirst = getL InsurancePolicyDetailsDto.paymentFrequency_ |> Option.toList
     printfn "lensFirst = %A" lensFirst

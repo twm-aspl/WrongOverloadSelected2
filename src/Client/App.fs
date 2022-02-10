@@ -8,7 +8,7 @@ open Shared
 
 type Model = {
     ServerResult : TestResults option
-    ClientResult : TestResults
+    ClientResult : Result<TestResults>
 }
 
 type Msg =
@@ -19,7 +19,12 @@ let getServerResult () = Fetch.fetchAs<unit, TestResults> "/api/init"
 let init () : Model * Cmd<Msg> =
     let initialModel = {
         ServerResult = None
-        ClientResult = fableOpticsTest()
+        ClientResult =
+            try
+                fableOpticsTest() |> Ok
+            with
+            | x ->
+                x.ToString() |> Error
     }
     let loadCountCmd =
         Cmd.OfPromise.perform getServerResult () ServerResultLoaded
@@ -47,7 +52,9 @@ let printResult ((test1, test2, test3, test4) : TestResults) =
 let view (model : Model) (dispatch : Msg -> unit) =
     div [] [
           h1 [] [ str "Client Result" ]
-          printResult model.ClientResult
+          match model.ClientResult with
+          | Ok r -> printResult r
+          | Error msg -> str msg
           h1 [] [ str "Server Result" ]
           match model.ServerResult with
           | Some r -> printResult r

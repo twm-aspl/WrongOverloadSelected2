@@ -1,8 +1,12 @@
 module Shared
 
+open AttemptRepro
 open Optics
 open Optics.Operators
 
+type Result<'T> =
+    | Ok of 'T
+    | Error of string
 
 type TestResults = int option * int option * int option * decimal option
 
@@ -50,7 +54,8 @@ let fableOpticsTest () : TestResults =
     | Some x -> printfn "test3: Some %A" x
     | None -> printfn "test3: None"
 
-    let test4 = AttemptRepro.AttemptRepro None
+    let account = { Details = { Tag = "Test"; InsurancePolicyData = None }} //Some { PaymentFrequency = PaymentFrequencyDto.Weekly; Discount = None } } }
+    let test4 = AttemptRepro (Some account)
     match test4 with
     | Some x -> printfn "test4: Some %A" x
     | None -> printfn "test4: None"
