@@ -17,6 +17,8 @@ type Msg =
 let getServerResult () = Fetch.fetchAs<unit, TestResults> "/api/init"
 
 let init () : Model * Cmd<Msg> =
+    GenericsMatching.testInlineNesting
+
     let initialModel = {
         ServerResult = None
         ClientResult =

@@ -7,6 +7,7 @@
     <ItemGroup>
         <None Include="index.html" />
         <None Include="paket.references" />
+        <Compile Include="GenericsMatching.fs" />
         <Compile Include="App.fs" />
     </ItemGroup>
     <ItemGroup>
